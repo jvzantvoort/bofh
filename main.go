@@ -6,7 +6,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/gobuffalo/packr"
 	"log"
 	"math/rand"
 	"net/http"
@@ -15,6 +14,8 @@ import (
 	"strings"
 	"sync/atomic"
 	"time"
+
+	"github.com/gobuffalo/packr"
 )
 
 type key int

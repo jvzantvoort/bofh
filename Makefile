@@ -1,5 +1,3 @@
-
-
 NAME := bofh
 URL ?= "http://pages.cs.wisc.edu/~ballard/bofh/excuses"
 VERSION := $(shell git describe --tags --abbrev=0)
@@ -13,7 +11,7 @@ GO ?= GO111MODULE=on go
 
 .PHONY: fmt
 fmt: ## Formatting source codes.
-	@$(GOIMPORTS) -w ./bofh
+	find . -type f -name '*.go' -not -path '*/vendor/*' -exec $(GOIMPORTS) -w "{}" \;
 
 .PHONY: lint
 lint: ## Run golint and go vet.
@@ -31,7 +29,7 @@ build: main.go  ## Build a binary.
 cross: main.go  ## Build binaries for cross platform.
 	mkdir -p pkg
 	@# darwin
-	@for arch in "amd64" "386"; do \
+	@for arch in "amd64"; do \
 		GOOS=darwin GOARCH=$${arch} make build; \
 		zip pkg/bofh_$(VERSION)_darwin_$${arch}.zip bofh; \
 	done;
