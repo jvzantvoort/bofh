@@ -1,5 +1,4 @@
 // Bastard Operator From Hell Excuse Server
-//
 package main
 
 import (
