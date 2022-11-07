@@ -14,8 +14,6 @@ import (
 	"strings"
 	"sync/atomic"
 	"time"
-
-	"github.com/gobuffalo/packr"
 )
 
 type key int
@@ -32,12 +30,12 @@ var (
 
 func GetExcuse() string {
 	var retv string
-	box := packr.NewBox("./templates")
-	excuses_text, err := box.FindString("excuses.txt")
+	excuses_text, err := Asset("templates/excuses.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
-	excuses_lines := strings.Split(strings.Replace(excuses_text, "\r\n", "\n", -1), "\n")
+
+	excuses_lines := strings.Split(strings.Replace(string(excuses_text), "\r\n", "\n", -1), "\n")
 	rand.Seed(time.Now().Unix())
 	retv = excuses_lines[rand.Intn(len(excuses_lines))]
 	return retv
