@@ -36,6 +36,4 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-            PACKAGE_NAME=bofh.${GITHUB_REF#refs/tags/bofh-}.${{ matrix.goos }}.${{ matrix.goarch }}.tar.gz
-            tar -czvf $PACKAGE_NAME -C build/${{ matrix.goos }}.${{ matrix.goarch }} .
-            echo ::set-output name=name::${PACKAGE_NAME}
+             CGO_ENABLED=0 GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch  }} go build -trimpath -o $GITHUB_WORKSPACE/build/${{ matrix.goos }}.${{ matrix.goarch }} .
